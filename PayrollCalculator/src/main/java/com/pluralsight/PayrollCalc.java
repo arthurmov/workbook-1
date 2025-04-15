@@ -17,17 +17,18 @@ public class PayrollCalc {
         System.out.println("Please enter the pay rate: ");
         float rate = scanner.nextFloat();
 
+        double pay;
+
         //Check if the employee worked overtime, then print the results
-        if ( hours > 40) {
+        if (hours > 40) {
             float overtimeHours = hours - 40;
-            double overtimePay = (overtimeHours * rate) * 1.5;
-            double pay = (rate * hours) + overtimePay;
-            System.out.println(name + " generated a gross pay of $" + pay);
+            double overtimePay = overtimeHours * rate * 1.5;
+            pay = (rate * hours) + overtimePay;
         }
         //Prints the employees pay if they didn't work overtime
         else {
-            double pay = rate * hours;
-            System.out.println(name + " generated a gross pay of $" + pay);
+            pay = rate * hours;
         }
+        System.out.printf("%s generated a gross pay of $%.2f", name, pay);
     }
 }
