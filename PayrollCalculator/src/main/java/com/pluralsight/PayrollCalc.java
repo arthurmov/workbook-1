@@ -8,13 +8,13 @@ public class PayrollCalc {
         Scanner scanner = new Scanner(System.in);
 
         //Get the known values
-        System.out.println("What is your name?");
+        System.out.println("Please enter the employee name: ");
         String name = scanner.next();
 
-        System.out.println("How many hours did you work?");
+        System.out.println("Please enter the number of hours worked: ");
         float hours = scanner.nextFloat();
 
-        System.out.println("What is your pay rate?");
+        System.out.println("Please enter the pay rate: ");
         float rate = scanner.nextFloat();
 
         //Check if the employee worked overtime, then print the results
@@ -24,7 +24,7 @@ public class PayrollCalc {
             double pay = (rate * hours) + overtimePay;
             System.out.println(name + " generated a gross pay of $" + pay);
         }
-
+        //Prints the employees pay if they didn't work overtime
         else {
             double pay = rate * hours;
             System.out.println(name + " generated a gross pay of $" + pay);
