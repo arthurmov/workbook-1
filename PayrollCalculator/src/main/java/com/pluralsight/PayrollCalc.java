@@ -21,10 +21,7 @@ public class PayrollCalc {
     public static double calcGrossPay(float hoursWorked, double payRate) {
         //Checks for overtime hours, then returns gross pay
         if (hoursWorked > 40) {
-            float overtimeHours = hoursWorked - 40;
-            double basePay = 40 * payRate;
-            double overtimePay = overtimeHours * payRate * 1.5;
-            return basePay + overtimePay;
+            return (40 * payRate) + ((hoursWorked - 40) * payRate * 1.5);
         }
         //Returns gross pay if no overtime
         else {
