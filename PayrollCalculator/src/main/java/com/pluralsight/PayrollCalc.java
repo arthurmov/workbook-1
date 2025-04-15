@@ -3,7 +3,6 @@ package com.pluralsight;
 import java.util.Scanner;
 
 public class PayrollCalc {
-
     //Initializes a static scanner
     static Scanner scanner = new Scanner(System.in);
     
