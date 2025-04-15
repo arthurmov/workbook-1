@@ -22,8 +22,9 @@ public class PayrollCalc {
         //Check if the employee worked overtime, then print the results
         if (hours > 40) {
             float overtimeHours = hours - 40;
+            double basePay = 40 * rate;
             double overtimePay = overtimeHours * rate * 1.5;
-            pay = (rate * hours) + overtimePay;
+            pay = basePay + overtimePay;
         }
         //Prints the employees pay if they didn't work overtime
         else {
