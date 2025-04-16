@@ -13,14 +13,15 @@ public class CarRental {
         double numDays = numOfDays();
         String tollTagOption = electronicTag();
         String gpsOption = gps();
+        String roadsideOption = roadsideAssistance();
         double age = promptForAge();
 
         //Calculates cost of options and underage surcharge separately
-        double optionsCost = optionsCost(tollTagOption, gpsOption, numDays);
+        double optionsCost = optionsCost(tollTagOption, gpsOption, roadsideOption, numDays);
         double underAgeCost = underAgeCost(age, numDays);
 
         //Calculates for total cost
-        double totalCost = calcTotalCost(numDays, tollTagOption, gpsOption, age);
+        double totalCost = calcTotalCost(numDays, tollTagOption, gpsOption, roadsideOption, age);
 
         System.out.printf("Overview: You are picking up your rental on %s, and you will have it for %.0f days.\n" +
                 "The cost of a basic car rental is $29.99.\n" +
@@ -57,6 +58,14 @@ public class CarRental {
         String gpsOption = scanner.next().toLowerCase();
         return gpsOption;
     }
+    //Asks if the user wants to include roadside assistance for an additional fee
+    public static String roadsideAssistance() {
+        System.out.println("Will you be needing roadside assistance?\n" +
+                "It will be an additional fee. (yes/no)");
+
+        String roadsideOption = scanner.next().toLowerCase();
+        return roadsideOption;
+    }
 
     //Prompts user to enter their age
     public static double promptForAge() {
@@ -66,9 +75,10 @@ public class CarRental {
     }
 
     //Calculates cost of the options
-    public static double optionsCost(String tollTagOption, String gpsOption, double numDays) {
+    public static double optionsCost(String tollTagOption, String gpsOption, String roadsideOption, double numDays) {
         double tagCost = 0;
         double gpsCost = 0;
+        double roadsideCost = 0;
 
         if(tollTagOption.equals("yes")) {
             tagCost = numDays * 3.95;
@@ -76,7 +86,10 @@ public class CarRental {
         if (gpsOption.equals("yes")) {
             gpsCost = numDays * 2.95;
         }
-        return tagCost + gpsCost;
+        if (roadsideOption.equals("yes")) {
+            roadsideCost = numDays * 3.95;
+        }
+        return tagCost + gpsCost + roadsideCost;
     }
 
     //Calculates cost of the underage surcharge
@@ -90,10 +103,10 @@ public class CarRental {
     }
 
     //Calculates total cost
-    public static double calcTotalCost(double numDays, String tollTag, String gps, double age) {
+    public static double calcTotalCost(double numDays, String tollTagOption, String gpsOption, String roadsideOption, double age) {
         double baseCost = numDays * 29.99;
         double surcharge = underAgeCost(age, numDays);
-        double optionCost = optionsCost(tollTag, gps, numDays);
+        double optionCost = optionsCost(tollTagOption, gpsOption, roadsideOption, numDays);
         return surcharge + baseCost + optionCost;
     }
 }
