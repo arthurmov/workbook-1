@@ -69,45 +69,31 @@ public class CarRental {
     public static double optionsCost(String tollTagOption, String gpsOption, double numDays) {
         double tagCost = 0;
         double gpsCost = 0;
-        double optionsCost = 0;
+
         if(tollTagOption.equals("yes")) {
             tagCost = numDays * 3.95;
         }
         if (gpsOption.equals("yes")) {
             gpsCost = numDays * 2.95;
-        } optionsCost = tagCost + gpsCost;
-        return optionsCost;
+        }
+        return tagCost + gpsCost;
     }
 
     //Calculates cost of the underage surcharge
     public static double underAgeCost(double age, double numDays) {
         double underAgeCost = 0;
         if (age < 25) {
-            underAgeCost = ((numDays * .3) + numDays) * 29.99;
+            double baseCost = numDays * 29.99;
+            underAgeCost = baseCost * 0.3;
         }
         return underAgeCost;
     }
 
     //Calculates total cost
     public static double calcTotalCost(double numDays, String tollTag, String gps, double age) {
-        double underAgeCost = 0;
-        double subtotal = 0;
-        double tag = 0;
-        double navigation = 0;
-
-        if (age < 25) {
-            underAgeCost = ((numDays * .3) + numDays) * 29.99;
-        } else {
-            subtotal = numDays * 29.99;
-        }
-        if (tollTag.equals("yes")) {
-            tag = numDays * 3.95;
-        }
-        if (gps.equals("yes")) {
-            navigation = numDays * 2.95;
-        }
-
-        double totalCost = underAgeCost + subtotal + tag + navigation;
-        return totalCost;
+        double baseCost = numDays * 29.99;
+        double surcharge = underAgeCost(age, numDays);
+        double optionCost = optionsCost(tollTag, gps, numDays);
+        return surcharge + baseCost + optionCost;
     }
 }
